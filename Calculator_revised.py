@@ -1,5 +1,7 @@
 """
 Changed the fully regex-based approach to expression calculation and testing, making it only a part of the replacement algorithm.
+The testing algorithm noew relies on arrays.
+Development in progress.
 """
 
 import re, operator
