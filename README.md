@@ -1,4 +1,4 @@
-RegEx based parser for expressions of an extended mathematical stack-based language.
+RegEx based parser for expressions of an extended-functionality mathematical stack-based language.
 Includes:
 - variable assignment and further use in expressions;
 - operator support: + - * / %;
