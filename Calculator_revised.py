@@ -6,10 +6,10 @@ Development in progress.
 
 import re, operator
 
-signs = {'+':operator.add, '-':operator.sub, '*': operator.mul, '/': operator.truediv}
+signs = {'+':operator.add, '-':operator.sub, '*': operator.mul, '/': operator.truediv, '%': operator.mod}
 convert = lambda inp: re.sub(r'[+-]+', lambda signs: ('+','-')[signs[0].count('-')%2], inp.replace(' ',''))
 calculate = lambda num1, op, num2:  str(float(signs[op](float(num1), float(num2))))
-PATTERN = re.compile(r"((?:(?:(?<=^)|(?<=[*/+-]))[-+])?\d+(?:\.\d+)?(?:e-?\d+)?|[*/+-])")
+PATTERN = re.compile(r"((?:(?:(?<=^)|(?<=[*/%+-]))[-+])?\d+(?:\.\d+)?(?:e-?\d+)?|[*/%+-])")
 
 def process(split_exp, default_signs = '+-', idx = 0):
     while 1:
@@ -21,5 +21,5 @@ def process(split_exp, default_signs = '+-', idx = 0):
         
 def calc(exp):
     while '(' in exp or ')' in exp:
-        exp = re.sub(r'[(]([^()]+)[)]', lambda x:''.join(process(PATTERN.findall(x[1]), '/*')), convert(exp))
-    return float(process(PATTERN.findall(convert(exp)),'/*')[0])
+        exp = re.sub(r'[(]([^()]+)[)]', lambda x:''.join(process(PATTERN.findall(x[1]), '*/%')), convert(exp))
+    return float(process(PATTERN.findall(convert(exp)),'*/%')[0])
